@@ -1,26 +1,28 @@
-#!/usr/bin/ruby
+# frozen_string_literal: true
 
-require './analyze_parser.rb'
+# !/usr/bin/ruby
 
+require './analyze_parser'
+# Class log parser
 class LogParser
   attr_accessor :parser
+
   def initialize(filepath)
     self.parser = LogAnalyze.new(filepath)
   end
 
   def most_page_views
     page_views = parser.page_views
-    page_views.map {|path, ip_count| "#{path} - #{ip_count} visits"}.join("\n")
+    page_views.map { |path, ip_count| "#{path} - #{ip_count} visits" }.join("\n")
   end
 
   def most_unique_page_views
     unique_views = parser.unique_page_views
-    unique_views.map {|path, uniq_ips| "#{path} - #{uniq_ips} unique views"}.join("\n")
+    unique_views.map { |path, uniq_ips| "#{path} - #{uniq_ips} unique views" }.join("\n")
   end
 
   def summary
-    ["Most Views:", most_page_views, 
-      "Most unique Views:", most_unique_page_views].join("\n")
+    ['Most Views:', most_page_views, 'Most unique Views:', most_unique_page_views].join("\n")
   end
 
   def print_summary
@@ -36,5 +38,5 @@ if ARGV.first
     puts e.message
   end
 else
-  puts "Usage: ./parser.rb webserver.log"
+  puts 'Usage: ./parser.rb webserver.log'
 end
